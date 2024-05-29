@@ -33,6 +33,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    dataBinding{
+        enable= true
+    }
+    buildFeatures {
+        viewBinding =true
+    }
 }
 
 dependencies {
@@ -51,6 +57,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation (libs.glide)
+    implementation (libs.glide.transformations)
+    implementation(libs.kotlinx.serialization.json)
+    implementation (libs.kotlinx.serialization.core)
 //    implementation(project(":kotlin-audio"))
 
 

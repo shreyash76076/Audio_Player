@@ -1,42 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"
-        android:layout_centerInParent="true"/>
+    <data>
+        <variable
+            name="mainactivity"
+            type="com.example.audioplayer.MainActivity" />
 
-    <Button
-        android:id="@+id/pauseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pause"
-        android:layout_below="@id/playButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next"
-        android:layout_below="@id/pauseButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/previousButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="prev"
-        android:layout_below="@id/nextButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+    </data>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/musicTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:text="Music Title"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@+id/musicTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:indeterminate="false"
+            android:progress="@{mainactivity.observablePosition}" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekbar"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/previousButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nextButton"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/baseline_arrow_back_ios_new_24" />
+
+            <Button
+                android:id="@+id/pauseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/playButton"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/baseline_pause_24"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/playButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/baseline_play_arrow_24" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/baseline_arrow_forward_ios_24" />
+
+
+        </LinearLayout>
+
+        <!--    <Button-->
+        <!--        android:id="@+id/playButton"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="Play"-->
+        <!--        android:layout_centerInParent="true"/>-->
+
+        <!--    <Button-->
+        <!--        android:id="@+id/pauseButton"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="Pause"-->
+        <!--        android:layout_below="@id/playButton"-->
+        <!--        android:layout_centerHorizontal="true"-->
+        <!--        android:layout_marginTop="20dp"/>-->
+        <!--    <Button-->
+        <!--        android:id="@+id/nextButton"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="next"-->
+        <!--        android:layout_below="@id/pauseButton"-->
+        <!--        android:layout_centerHorizontal="true"-->
+        <!--        android:layout_marginTop="20dp"/>-->
+        <!--    <Button-->
+        <!--        android:id="@+id/previousButton"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="prev"-->
+        <!--        android:layout_below="@id/nextButton"-->
+        <!--        android:layout_centerHorizontal="true"-->
+        <!--        android:layout_marginTop="20dp"/>-->
+
+    </RelativeLayout>
+</layout>
