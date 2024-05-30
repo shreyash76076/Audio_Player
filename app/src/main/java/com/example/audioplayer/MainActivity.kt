@@ -3,6 +3,7 @@
     import android.annotation.SuppressLint
     import android.media.Image
     import android.os.Bundle
+    import android.os.Handler
     import android.util.Log
     import android.view.View
     import android.widget.Button
@@ -56,7 +57,8 @@
         private var wasPlayingBeforeSeek = false
         private var timer: Timer? = null
 
-        private lateinit var exoPlayer: ExoPlayer
+        private lateinit var runnable: Runnable
+        private  var handler= Handler()
         private var binding:ActivityMainBinding?=null
 
         private val job = Job()
@@ -83,6 +85,14 @@
             player.playerOptions.repeatMode = RepeatMode.ALL
             setupNotification()
             observeEvents()
+            binding?.seekbar?.progress=0
+            binding?.seekbar?.max= player.duration.toInt()
+          runnable= Runnable {
+              binding?.seekbar?.progress= player.position.toInt()
+              handler.postDelayed(runnable,1000)
+          }
+            handler.postDelayed(runnable,10000
+            )
 
 
 
@@ -221,8 +231,8 @@
                 when (it) {
                     AudioPlayerState.PLAYING -> {
                         binding?.musicTitle?.text=player.currentItem?.title.toString()
-                        observablePosition.set(player.position.toInt())
-                        observableDuration.set(player.duration.toInt())
+                        binding?.seekbar?.progress=player.position.toInt()
+                        binding?.seekbar?.max= player.duration.toInt()
                         binding?.imageView?.let { it1 ->
                             Glide.with(this@MainActivity)
                                 .load(player.currentItem?.artwork)
@@ -286,23 +296,22 @@
                 val position: Long = progress.toLong()
                 Log.d("Progress", "$position")
                 player.seek(position, TimeUnit.MILLISECONDS)
-                observablePosition.set(position.toInt())
+
             }
         }
 
 
         override fun onStartTrackingTouch(p0: SeekBar?) {
-            wasPlayingBeforeSeek = player.playerState == AudioPlayerState.PLAYING
-            if (wasPlayingBeforeSeek) {
-                player.pause() // Pause the player during the seek
-            }
+
         }
 
         override fun onStopTrackingTouch(p0: SeekBar?) {
-            if (wasPlayingBeforeSeek) {
-                player.play()
-            }
+
         }
+
+
+
+
         inner class ProgressUpdate : TimerTask() {
             override fun run() {
                 runOnUiThread { // This code will always run on the UI thread, therefore is safe to modify UI elements.
