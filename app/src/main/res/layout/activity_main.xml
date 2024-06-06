@@ -17,106 +17,190 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/musicTitle"
+
+
+
+
+        <Button
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Music"
+            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:text="Music Title"
-            android:textSize="30sp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_below="@+id/musicTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp" />
-
-        <SeekBar
-            android:id="@+id/seekbar"
-            android:layout_width="300dp"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mediaPlayer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:indeterminate="false"
-            android:progress="@{mainactivity.observablePosition}" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingVertical="8dp"
+            android:background="#1e81b0">
 
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/seekbar"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/previousButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/nextButton"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/baseline_arrow_back_ios_new_24" />
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnPlayPrevious"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/pauseButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/playButton"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/baseline_pause_24"
-                android:visibility="gone" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:singleLine="true"
+                    android:transitionName="music_title"
+                    tools:text="Title"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:lines="1"/>
 
-            <Button
-                android:id="@+id/playButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/baseline_play_arrow_24" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:transitionName="music_singer"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    tools:text="artist"
+                    android:singleLine="true"
+                    android:drawablePadding="2dp"
+                    app:drawableStartCompat="@drawable/ic_vector_music"
+                    />
 
-            <Button
-                android:id="@+id/nextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            </LinearLayout>
 
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/baseline_arrow_forward_ios_24" />
+            <ImageButton
+                android:id="@+id/btnPlayPrevious"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+
+                android:scaleType="fitXY"
+                android:transitionName="music_play_previous"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/media_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_vector_play_previous"
+
+                />
+
+            <ImageButton
+                android:id="@+id/media_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+
+                android:scaleType="fitXY"
+                android:transitionName="music_play_pause"
+                android:src="@drawable/ic_vector_pause"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnPlaynext"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_vector_play" />
 
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/btnPlaynext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+                android:scaleType="fitXY"
+                android:transitionName="music_play_next"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_vector_play_next" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--    <Button-->
-        <!--        android:id="@+id/playButton"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="Play"-->
-        <!--        android:layout_centerInParent="true"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/musicTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="100dp"-->
+<!--            android:text="Music Title"-->
+<!--            android:textSize="30sp" />-->
 
-        <!--    <Button-->
-        <!--        android:id="@+id/pauseButton"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="Pause"-->
-        <!--        android:layout_below="@id/playButton"-->
-        <!--        android:layout_centerHorizontal="true"-->
-        <!--        android:layout_marginTop="20dp"/>-->
-        <!--    <Button-->
-        <!--        android:id="@+id/nextButton"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="next"-->
-        <!--        android:layout_below="@id/pauseButton"-->
-        <!--        android:layout_centerHorizontal="true"-->
-        <!--        android:layout_marginTop="20dp"/>-->
-        <!--    <Button-->
-        <!--        android:id="@+id/previousButton"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:text="prev"-->
-        <!--        android:layout_below="@id/nextButton"-->
-        <!--        android:layout_centerHorizontal="true"-->
-        <!--        android:layout_marginTop="20dp"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:layout_below="@+id/musicTitle"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="20dp" />-->
+
+<!--        <SeekBar-->
+<!--            android:id="@+id/seekbar"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/imageView"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:indeterminate="false"-->
+<!--            android:progress="@{mainactivity.observablePosition}" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/seekbar"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <Button-->
+<!--                android:id="@+id/previousButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/nextButton"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:background="@drawable/baseline_arrow_back_ios_new_24" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/pauseButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/playButton"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:background="@drawable/baseline_pause_24"-->
+<!--                android:visibility="gone" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/playButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:background="@drawable/baseline_play_arrow_24" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/nextButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:background="@drawable/baseline_arrow_forward_ios_24" />-->
+
+
+<!--        </LinearLayout>-->
+
+
 
     </RelativeLayout>
 </layout>
